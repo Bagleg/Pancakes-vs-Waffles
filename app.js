@@ -1,5 +1,5 @@
-const topChoice = document.querySelector('.top')
-const botChoice = document.querySelector('.bottom')
+const topChoice = document.getElementById('top')
+const botChoice = document.getElementById('bot')
 const cover = document.getElementById('cover')
 const rules = document.getElementById('rules')
 const start = document.querySelector('.start')
@@ -35,28 +35,40 @@ function cont(i){
     } else {
         cover.classList.remove('hide');
         cover.classList.add('cover');
-        return 'Internet';
+        return 'Housing';
     }
 };
 
 topChoice.addEventListener('click', e => {
     next = cont(i)
     let HTML = `
-    <div class="container bottom choice my-4 mx-auto rounded">
+    <div class="container choice my-4 rounded" id="bot">
         <h5 class="text-center">${next}</h5>
     </div>`
     botChoice.innerHTML = HTML
     i++
+    topChoice.classList.remove('top')
+    topChoice.classList.add('top-push')
+    setTimeout(() => {
+        topChoice.classList.remove('top-push')
+        topChoice.classList.add('top')
+    }, 75);
 });
 
 botChoice.addEventListener('click', e => {
     next = cont(i)
     let HTML = `
-    <div class="container top choice my-4 mx-auto rounded">
+    <div class="container choice my-4 rounded" id="top">
         <h5 class="text-center">${next}</h5>
     </div>`
     topChoice.innerHTML = HTML
     i++
+    botChoice.classList.remove('bottom')
+    botChoice.classList.add('bot-push')
+    setTimeout(() => {
+        botChoice.classList.remove('bot-push')
+        botChoice.classList.add('bottom')
+    }, 75);
 });
 
 cover.addEventListener('click', e =>{
@@ -66,4 +78,15 @@ cover.addEventListener('click', e =>{
 start.addEventListener('click', e => {
     rules.classList.remove('rules')
     rules.classList.add('hide')
+
 })
+
+// const greyOut = function(loc, locChoice, push){
+//     locChoice.classList.remove(loc)
+//     locChoice.classList.add(push)
+//     setTimeout(() => {
+//         locChoice.classList.remove(push)
+//         locChoice.classList.add(loc)
+//     }, 75);   
+// }
+ 
